@@ -1,0 +1,72 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>web</title>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="col-md-6" style="background-color:pink">
+<h1><b>signup</b></h1><br>
+<form action="/signup" method="post">
+<label>name:</label>
+<input type="text" name="name"><br><br>
+<label>email:</label>
+<input type="email" name="email"><br><br>
+<label>password:</label>
+<input type="password" name="pass"><br><br>
+<label>mobile number:</label>
+<input type="tel" name="phno"><br><br>
+<label>gender:</label>
+<input type="radio" name="gender" value="m">male&nbsp&nbsp<input type="radio" name="gender" value="f">female<br><br>
+<label>college:</label>
+<select name="college">
+<option></option>
+<option value="AEC">AEC</option>
+<option value="ACET">ACET</option>
+<option value="ACE">ACE</option>
+</select><br><br>
+<label>qualification:</label>
+<select name="qual">
+<option></option>
+<option value="B.TECH">B.TECH</option>
+<option value="MBA">MBA</option>
+<option value="M.TECH">M.TECH</option>
+</select><br><br>
+<label>specification:</label>
+<select name="spec">
+<option></option>
+<option value="CSE">CSE</option>
+<option value="IT">IT</option>
+<option value="ECE">ECE</option>
+<option value="EEE">EEE</option>
+<option value="CIVIL">CIVIL</option>
+<option value="MECH">MECH</option>
+<option value="OTHER">OTHER</option>
+</select><br><br>
+<label>address:</label>
+<textarea name="ad"></textarea><br><br>
+<label>year of completion:</label>
+<input type="number" name="yoc"><br><br>
+<input type="submit" name="submit">
+<input type="reset" value="reset">
+</form>
+</div>
+<div class="col-md-6" style="background-color:lightblue;height:620px">
+<h1><b>login</b></h1><br>
+<p class="alert alert-danger">#{err}</p>
+<form action="/login" method="post">
+<label>email:</label>
+<input type="email" name="ema"><br><br>
+<label>password:</label>
+<input type="password" name="pw"><br><br>
+<input type="submit" value="login">
+<input type="submit" value="forget password">
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>
