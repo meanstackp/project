@@ -25,6 +25,8 @@ html
           a.active(href='#form', data-toggle='pill') form
         li
           a(href='#list', data-toggle='pill') list
+        li
+          a(href='logout') logout
       .tab-content
         #form.tab-pane.fade.in.active
           form(action='/form', method='post',enctype='multipart/form-data')
@@ -49,13 +51,16 @@ html
           table#example.table.table-bordered
             thead
               tr
+                th profile
                 th First Name
                 th Last Name
                 th Email
                 th Action
             tbody
               each member in data
-                tr  
+                tr
+                  td
+                    img(src="images/"+member.image,height="50px",width="50px")
                   td #{member.firstname}
                   td #{member.lastname}
                   td #{member.email}

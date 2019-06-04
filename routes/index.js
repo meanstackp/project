@@ -5,22 +5,46 @@ var moment=require('moment');
 var nodemailer=require('nodemailer');
 var randomstring=require('randomstring');
 var multer=require('multer');
-var upload = multer({ dest: 'uploads/' });
+//var upload = multer({ dest: 'uploads/' });
 var db=monk('localhost:27017/aditya');
 var collection=db.get('signup');
 var collection1=db.get('form');
-console.log('connected');
+//console.log('connected');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+});
+ 
+var upload = multer({ storage: storage })
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index');
+router.get('/', function(req, res) { 
+	if(req.session&&req.session.user){
+		res.locals.user=req.session.user;
+        res.render('/home');
+    }
+    else{
+    	req.session.reset();
+    	res.render('index');
+    }
+
 });
 router.get('/home',function(req,res){
-	collection1.find({},function(err,docs){
-		console.log(docs);
-		res.locals.data=docs;
-	res.render('home');
-    });
+	if(req.session&&req.session.user){
+		res.locals.user=req.session.user;
+	    collection1.find({},function(err,docs){
+	    	console.log(docs);
+	    	res.locals.data=docs;
+	    res.render('home');
+        });
+	}
+	else{
+		res.redirect('/');
+	}
 });
 router.get('/forgetpassword', function(req, res) {
   res.render('forgetpassword');
@@ -117,6 +141,8 @@ router.post('/login',function(req,res){
 		}
 		else if(docs){
 			console.log("success");
+			delete docs.password;
+			req.session.user=docs;
 			res.redirect('/home');
 		}
 		else{
@@ -124,12 +150,17 @@ router.post('/login',function(req,res){
 		}
 	});
 });
+router.get('/logout',function(req,res){
+    req.session.reset();
+	res.redirect('/');
+})
 router.post('/form',upload.single('image'),function(req,res){
 	console.log(req.file);
 	var data={
 		firstname:req.body.ftname,
 		lastname:req.body.ltname,
 		email:req.body.email,
+		image:req.file.originalname,
 	}
 	collection1.insert(data,function(err,docs){
 		console.log(docs);
