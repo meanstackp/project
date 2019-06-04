@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 <div class="row">
-<div class="col-md-6" style="background-color:pink">
+<div class="col-md-4 col-md-offset-1" style="background-color:pink">
 <h1><b>signup</b></h1><br>
 <form action="/signup" method="post">
 <label>name:</label>
@@ -54,16 +54,16 @@
 <input type="reset" value="reset">
 </form>
 </div>
-<div class="col-md-6" style="background-color:lightblue;height:620px">
+<div class="col-md-4 col-md-offset-1" style="background-color:lightblue;height:620px">
 <h1><b>login</b></h1><br>
-<p class="alert alert-danger">#{err}</p>
+<p>#{err}</p>
 <form action="/login" method="post">
 <label>email:</label>
 <input type="email" name="ema"><br><br>
 <label>password:</label>
 <input type="password" name="pw"><br><br>
 <input type="submit" value="login">
-<input type="submit" value="forget password">
+<a href="/forgetpassword">forgetpassword</a>
 </form>
 </div>
 </div>
